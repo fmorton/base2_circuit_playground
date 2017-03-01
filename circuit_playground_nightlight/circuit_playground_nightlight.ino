@@ -9,7 +9,7 @@ const int inactive_nightlight_delay = 2000;
 
 int current_color = 0;
 int colors[][3] = { { 255, 0, 0 }, { 0, 0, 223 }, { 0, 223, 0 }, { 169, 223, 20 }, { 20, 217, 223 }, { 20, 33, 223 } };
-int colors_count = sizeof(colors[0]) - 1;
+int colors_count = sizeof(colors[0]);
 
 void setup() {
   CircuitPlayground.begin();
@@ -56,7 +56,7 @@ int change_colors(int color) {
   for(int brightness=min_brightness;brightness<=max_brightness;++brightness) set_color(red, green, blue, brightness, brightness_delay);
   for(int brightness=max_brightness;brightness>=min_brightness;--brightness) set_color(red, green, blue, brightness, brightness_delay);
 
-  if(++color > colors_count) color = 0;
+  if(++color >= colors_count) color = 0;
 
   if((min_brightness > 0) && active_nightlight()) {
     int *to_rgb_colors = colors[color];
