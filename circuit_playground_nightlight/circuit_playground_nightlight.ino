@@ -58,7 +58,7 @@ int change_colors(int color) {
 
   if(++color > colors_count) color = 0;
 
-  if(min_brightness > 0) {
+  if((min_brightness > 0) && active_nightlight()) {
     int *to_rgb_colors = colors[color];
 
     transition_colors(rgb_colors, to_rgb_colors);
@@ -67,10 +67,17 @@ int change_colors(int color) {
   return(color);
 }
 
+void deactive_nightlight() {
+  CircuitPlayground.clearPixels();
+
+  current_color = 0;
+}
+
 boolean active_nightlight() {
+  if(CircuitPlayground.slideSwitch()) return(true);
   if(analogRead(A5) <= active_nightlight_light_level) return(true);
 
-  CircuitPlayground.clearPixels();
+  deactive_nightlight();
 
   delay(inactive_nightlight_delay);
 
