@@ -4,6 +4,8 @@ const int min_brightness = 3;
 const int max_brightness = 35;
 const int brightness_delay = 80;
 const int transition_delay = 5;
+const int active_nightlight_light_level = 10;
+const int inactive_nightlight_delay = 2000;
 
 int current_color = 0;
 int colors[][3] = { { 255, 0, 0 }, { 0, 0, 223 }, { 0, 223, 0 }, { 169, 223, 20 }, { 20, 217, 223 }, { 20, 33, 223 } };
@@ -65,6 +67,18 @@ int change_colors(int color) {
   return(color);
 }
 
+boolean active_nightlight() {
+  if(analogRead(A5) <= active_nightlight_light_level) return(true);
+
+  CircuitPlayground.clearPixels();
+
+  delay(inactive_nightlight_delay);
+
+  return(false);
+}
+
 void loop() {
-  current_color = change_colors(current_color);
+  if(active_nightlight()) {
+    current_color = change_colors(current_color);
+  }
 }
