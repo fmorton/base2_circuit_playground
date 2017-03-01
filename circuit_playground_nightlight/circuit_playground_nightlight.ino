@@ -2,6 +2,10 @@
 //  circuit_playground_nightlight turns the circuit playground into a nightlight
 //  cycling through a list of colors. The nightlight is active if it is in the dark
 //  or the slide switch is in the "right" position.
+//
+//  author frank morton
+//  copyright 2017 base2 incorporated
+//  mit license (https://opensource.org/licenses/MIT)
 //----------------------------------------------------------------------------------------------------
 #include <Adafruit_CircuitPlayground.h>
 
