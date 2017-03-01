@@ -5,7 +5,8 @@ const int max_brightness = 35;
 const int brightness_delay = 80;
 const int transition_delay = 5;
 const int active_nightlight_light_level = 10;
-const int inactive_nightlight_delay = 2000;
+const int inactive_nightlight_delay_led_on = 500;
+const int inactive_nightlight_delay_led_off = 1500;
 
 int current_color = 0;
 int colors[][3] = { { 255, 0, 0 }, { 0, 0, 223 }, { 0, 223, 0 }, { 169, 223, 20 }, { 20, 217, 223 }, { 20, 33, 223 } };
@@ -79,7 +80,13 @@ boolean active_nightlight() {
 
   deactive_nightlight();
 
-  delay(inactive_nightlight_delay);
+  CircuitPlayground.redLED(HIGH);
+
+  delay(inactive_nightlight_delay_led_on);
+
+  CircuitPlayground.redLED(LOW);
+
+  delay(inactive_nightlight_delay_led_off);
 
   return(false);
 }
